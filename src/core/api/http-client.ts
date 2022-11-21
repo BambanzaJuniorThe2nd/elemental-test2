@@ -72,6 +72,7 @@ export class HttpClient implements IHttpClient {
 
     const url = `${this.baseUrl}${path}`;
     const resp = await fetch(url, config);
+    console.log("resp: ", resp);
     const json = resp.status !== 204 ? await resp.json() : undefined;
 
     if (this.onAfterRequest) {
@@ -82,6 +83,7 @@ export class HttpClient implements IHttpClient {
       throw new ApiError(resp, json);
     }
 
+    console.log("json: ", json);
     console.log("json.results: ", json.results);
     return (json.results ? json.results : json) as T;
   }
@@ -98,7 +100,7 @@ class ApiError extends Error {
     this.statusCode = httpResp.status;
     this.statusText = httpResp.statusText;
     this.code = body.code as string;
-    this.message = body.message as string;
+    this.message = body.error as string;
   }
 }
 

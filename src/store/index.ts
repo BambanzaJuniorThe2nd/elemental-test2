@@ -1,5 +1,5 @@
 import { ref, computed } from "vue";
-import { KnowledgeCategory } from "../core/types";
+import { KnowledgeCategory, AppMessage } from "../core/types";
 
 /**
  * Bundle and expose variables/functionalities
@@ -18,8 +18,26 @@ function initKnowledgeCategories() {
   };
 }
 
+/**
+ * Bundle and expose variables/functionalities
+ * to do with app-wide message management
+ */
+function initAppMessage() {
+  const message = ref<AppMessage>({ type: "", message: "" });
+
+  function setMessage(newMessage: AppMessage) {
+    message.value = newMessage;
+  }
+
+  return {
+    message,
+    setMessage,
+  };
+}
+
 const store = {
   ...initKnowledgeCategories(),
+  ...initAppMessage(),
 };
 
 export default store;

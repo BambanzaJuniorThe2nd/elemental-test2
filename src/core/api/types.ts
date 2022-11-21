@@ -1,4 +1,4 @@
-import { KnowledgeCategory, AuthorProfile } from "../types";
+import { KnowledgeCategory, ContactDataPostArgs } from "../types";
 
 export interface IHttpClient {
   baseUrl: string;
@@ -35,5 +35,5 @@ export interface IHttpClient {
 
 export interface IBackendClient {
   getKnowledgeCategories(): Promise<KnowledgeCategory[]>;
-  getAuthorProfile(authorId: string): Promise<AuthorProfile>;
+  postContactData(args: ContactDataPostArgs): Promise<void>;
 }

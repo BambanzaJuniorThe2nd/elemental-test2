@@ -1,4 +1,9 @@
-import { Author, AuthorProfile, KnowledgeCategory } from "../types";
+import {
+  Author,
+  AuthorProfile,
+  KnowledgeCategory,
+  ContactDataPostArgs,
+} from "../types";
 import { IHttpClient, IBackendClient } from "./types";
 
 export class BackendClient implements IBackendClient {
@@ -9,11 +14,14 @@ export class BackendClient implements IBackendClient {
   }
 
   async getKnowledgeCategories(): Promise<KnowledgeCategory[]> {
-    console.log("Inside getKnowledgeCategories");
     return await this.client.get<KnowledgeCategory[]>(`/get_knowledge/`);
   }
 
-  async getAuthorProfile(authorId: string): Promise<AuthorProfile> {
-    return await this.client.get<AuthorProfile>(`/author/${authorId}`);
+  async postContactData(args: ContactDataPostArgs): Promise<void> {
+    console.log("Inside postContactData...");
+    await this.client.post<ContactDataPostArgs, null>(
+      `/contact_form_test/`,
+      args,
+    );
   }
 }

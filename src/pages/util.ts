@@ -1,16 +1,27 @@
 import store from "../store";
 import { backendClient } from "../api";
-import { KnowledgeCategory } from "../core";
+import { KnowledgeCategory, ContactDataPostArgs } from "../core";
 
+// Refetches and stores knowledge categories
+// if not already set in store
 export const refreshData = async () => {
   if (!store.categories.value.length) {
     const categories = await backendClient().getKnowledgeCategories();
-    console.log("categories in refreshData: ", categories);
-    store.setKnowledgeCategories(categories);
+    const sortedCategories = getSortedCategories(categories);
+    store.setKnowledgeCategories(sortedCategories);
   }
 };
 
-export const getFormattedCategories = (
+// Calls the relevant backend endpoint for posting contact data
+export const submitContactData = async (args: ContactDataPostArgs) => {
+  await backendClient().postContactData(args);
+  store.setMessage({
+    type: "success",
+    message: "Successfully submitted contact details",
+  });
+};
+
+export const getSortedCategories = (
   categories: KnowledgeCategory[],
 ): KnowledgeCategory[] => {
   // sort by name
@@ -41,3 +52,26 @@ export const getFormattedCategories = (
   console.log("sorted categories: ", sortedCategories);
   return sortedCategories;
 };
+
+// Handles error messages by setting them
+// in the store, which makes it easy to
+// display in notifications.
+export const handleError = (e: any) => {
+  store.setMessage({ type: "error", message: e.message });
+};
+
+export const groupKnowledgeByCategory = () => {
+  return groupBy(store.categories.value, "cat");
+};
+
+function groupBy<T>(collection: T[], key: keyof T) {
+  const groupedResult = collection.reduce((previous, current) => {
+    if (!previous[current[key]]) {
+      previous[current[key]] = [] as T[];
+    }
+
+    previous[current[key]].push(current);
+    return previous;
+  }, {} as any); // tried to figure this out, help!!!!!
+  return groupedResult;
+}

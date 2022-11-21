@@ -1,12 +1,3 @@
-export interface Author {
-  id: number;
-  surname: string;
-  initials: string;
-  title: string;
-  institution: string;
-  rating: string;
-}
-
 export interface User {
   _id: string;
   name: string;
@@ -16,19 +7,6 @@ export interface User {
   isAdmin: boolean;
   createdAt: Date;
   updatedAt: Date;
-}
-
-export interface Publication {
-  title: string;
-  numberOfCitations: number;
-  year: string;
-  externalLink: string;
-}
-
-export interface AuthorProfile {
-  author: Author;
-  subFields: string[];
-  publications: Publication[];
 }
 
 export interface AppMessage {
@@ -47,4 +25,10 @@ export interface KnowledgeCategory {
   description: string;
   like: string;
   cat: string;
+}
+
+export interface ContactDataPostArgs {
+  name: string;
+  email: string;
+  phone: string;
 }
