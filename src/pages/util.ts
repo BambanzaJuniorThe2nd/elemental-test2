@@ -7,8 +7,8 @@ import { KnowledgeCategory, ContactDataPostArgs } from "../core";
 export const refreshData = async () => {
   if (!store.categories.value.length) {
     const categories = await backendClient().getKnowledgeCategories();
-    const sortedCategories = getSortedCategories(categories);
-    store.setKnowledgeCategories(sortedCategories);
+    const sortedKnowledgeCategories = getSortedKnowledgeCategories(categories);
+    store.setKnowledgeCategories(sortedKnowledgeCategories);
   }
 };
 
@@ -21,45 +21,39 @@ export const submitContactData = async (args: ContactDataPostArgs) => {
   });
 };
 
-export const getSortedCategories = (
+// Sorts
+export const getSortedKnowledgeCategories = (
   categories: KnowledgeCategory[],
 ): KnowledgeCategory[] => {
   // sort by name
-  const sortedCategories = categories.sort((a, b) => {
+  const sorted = categories.sort((a, b) => {
     const catA = a.cat.toUpperCase(); // ignore upper and lowercase
     const catB = b.cat.toUpperCase(); // ignore upper and lowercase
     const titleA = a.title.toUpperCase();
     const titleB = b.title.toUpperCase();
-    if (catA < catB) {
+    if ((catA == catB && titleA < titleB) || catA < catB) {
       return -1;
     }
-    if (catB > catB) {
+    if ((catA == catB && titleA > titleB) || catA > catB) {
       return 1;
     }
 
-    if (titleA < titleB) {
-      return -1;
-    }
-
-    if (titleA > titleB) {
-      return 1;
-    }
-
-    // both cat and title must be equal
+    // both cat and title must be equal, which is unlikely
     return 0;
   });
 
-  console.log("sorted categories: ", sortedCategories);
-  return sortedCategories;
+  return sorted;
 };
 
 // Handles error messages by setting them
 // in the store, which makes it easy to
-// display in notifications.
+// display as notifications.
 export const handleError = (e: any) => {
   store.setMessage({ type: "error", message: e.message });
 };
 
+// Groups data stored in store.categories
+// by key field 'cat'
 export const groupKnowledgeByCategory = () => {
   return groupBy(store.categories.value, "cat");
 };
@@ -72,6 +66,6 @@ function groupBy<T>(collection: T[], key: keyof T) {
 
     previous[current[key]].push(current);
     return previous;
-  }, {} as any); // tried to figure this out, help!!!!!
+  }, {} as any);
   return groupedResult;
 }

@@ -1,25 +1,25 @@
 <template>
-  <m-accordion>
-    <m-accordion-item :showExpanded="true">
-      <template #header>
-        <h2>Item 1</h2>
-      </template>
+  <div class="w-11/12 mt-2 mx-auto overflow-x-auto relative shadow-md mb-6">
+    <m-accordion>
+      <m-accordion-item
+        v-for="(value, key, index) in computedKnowledgeCategories"
+      >
+        <template #header>
+          <h2>{{ key }}</h2>
+        </template>
 
-      <div class="item-container">
-        Here is some content that is shown by default!
-      </div>
-    </m-accordion-item>
-
-    <m-accordion-item>
-      <template #header>
-        <h2>Item 2</h2>
-      </template>
-
-      <div class="item-container">
-        And here is some content that is hidden by default!
-      </div>
-    </m-accordion-item>
-  </m-accordion>
+        <div class="item-container">
+          <ul class="pl-5 text-gray-500 list-disc dark:text-gray-400">
+            <li v-for="item in value">
+              <span class="text-blue-600 dark:text-blue-500 hover:underline">{{
+                item.title
+              }}</span>
+            </li>
+          </ul>
+        </div>
+      </m-accordion-item>
+    </m-accordion>
+  </div>
   <!-- <div class="w-11/12 mt-2 mx-auto overflow-x-auto relative shadow-md mb-6">
     <div id="accordion-collapse" data-accordion="collapse">
       <h2
@@ -109,3 +109,8 @@ const appendIndexOnId = (index: number, id: string) => {
   return `${id}-${index}`;
 };
 </script>
+<style>
+.item-container {
+  padding: 32px 16px;
+}
+</style>

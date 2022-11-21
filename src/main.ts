@@ -4,6 +4,7 @@ import "./styles/index.css";
 import { initBackendClient } from "./api";
 import App from "./App.vue";
 import { registerToastManager } from "./app-utils";
+import "made-vue-accordion/styles.scss";
 import Accordion from "made-vue-accordion";
 
 initBackendClient();
