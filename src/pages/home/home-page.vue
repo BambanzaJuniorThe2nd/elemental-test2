@@ -1,5 +1,10 @@
 <template>
-  <div class="w-11/12 mt-2 mx-auto overflow-x-auto relative shadow-md mb-6">
+  <div class="w-7/12 mt-2 mx-auto overflow-x-auto relative shadow-md-lg p-3">
+    <h3
+      class="mb-4 text-xl text-center font-medium text-gray-900 dark:text-white"
+    >
+      Home Page
+    </h3>
     <m-accordion>
       <m-accordion-item
         v-for="(value, key, index) in computedKnowledgeCategories"

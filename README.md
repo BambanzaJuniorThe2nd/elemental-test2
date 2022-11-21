@@ -1,16 +1,45 @@
-# Vue 3 + TypeScript + Vite
+# Elemental Test2
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A two-page web app built with Vite, Typescript (Javascript), and Vue3
 
-## Recommended IDE Setup
+The home page, the first of the two pages, retrieves, sorts, groups by category, and displays knowledge data from http://dev3.elemental.co.za/elemental-cms/front_end/get_knowledge. The other page, on the other hand, provides a form requesting a name, email, and phone number, all of which are sent upon successful validation to http://dev3.elemental.co.za/elemental-cms/front_end/contact_form_test
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Cloning the project
 
-## Type Support For `.vue` Imports in TS
+To clone the project and have its codebase on your local machine, you will need to run the following command in your terminal
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+```
+git clone https://github.com/BambanzaJuniorThe2nd/elemental-test2.git
+```
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+## Installing dependencies
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+Before running the app locally, you will need to install its dependencies by issuing the following command
+
+```
+npm install
+```
+
+## Running the app
+
+To run the app, execute the command
+
+```
+npm run dev
+```
+
+## Accessing the app
+
+Once the entire app has been built and is now running, launch your favorite web browser and type the address below to navigate the two pages.
+
+```
+http://127.0.0.1:5173/
+```
+
+## Building the app for production
+
+Alternatively, you can build the app for production by executing the command below. The production-ready app will be available in the dist folder inside the root folder.
+
+```
+npm run build
+```

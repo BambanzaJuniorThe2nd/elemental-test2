@@ -13,7 +13,6 @@ export class BackendClient implements IBackendClient {
   }
 
   async postContactData(args: ContactDataPostArgs): Promise<void> {
-    console.log("Inside postContactData...");
     await this.client.post<ContactDataPostArgs, null>(
       `/contact_form_test/`,
       args,

@@ -4,7 +4,7 @@
       <h3
         class="mb-4 text-xl text-center font-medium text-gray-900 dark:text-white"
       >
-        Contact Us
+        Contact Page
       </h3>
       <form @submit.prevent="submit" class="mt-8 space-y-6" action="#">
         <div>
