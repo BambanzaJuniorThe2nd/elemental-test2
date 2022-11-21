@@ -1,9 +1,4 @@
-import {
-  Author,
-  AuthorProfile,
-  KnowledgeCategory,
-  ContactDataPostArgs,
-} from "../types";
+import { KnowledgeCategory, ContactDataPostArgs } from "../types";
 import { IHttpClient, IBackendClient } from "./types";
 
 export class BackendClient implements IBackendClient {
